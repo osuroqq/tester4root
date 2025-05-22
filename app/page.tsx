@@ -21,6 +21,21 @@ import {
 import BeforeAfterSlider from "./before-after-slider"
 import { useLanguage } from "./contexts/LanguageContext"
 import { translations } from "./translations"
+import Script from "next/script"
+import { useEffect } from "react"
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget: (options: {
+        url: string;
+        parentElement: Element | null;
+        prefill?: Record<string, any>;
+        utm?: Record<string, any>;
+      }) => void;
+    }
+  }
+}
 
 export default function LandingPage() {
   const { language, toggleLanguage } = useLanguage()
@@ -28,6 +43,10 @@ export default function LandingPage() {
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
+      <Script 
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="lazyOnload"
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-primary text-white backdrop-blur supports-[backdrop-filter]:bg-primary/90">
         <div className="container flex h-16 items-center justify-between">
@@ -399,30 +418,6 @@ export default function LandingPage() {
                     {t.contact.subtitle}
                   </p>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-primary" />
-                    <p className="text-muted-foreground">Rudolf-Breitscheid-Straße 70, 67655 Kaiserslautern</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-primary" />
-                    <p className="text-muted-foreground">(+49) 173-9621062</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Users className="h-5 w-5 text-primary" />
-                    <p className="text-muted-foreground">
-                      Monday - Friday: 8am - 6pm
-                      <br />
-                      Saturday: 9am - 3pm
-                      <br />
-                      Sunday: Closed
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <AtSign className="h-5 w-5 text-primary" />
-                    <p className="text-muted-foreground">root@business.de</p>
-                  </div>
-                </div>
               </div>
               <div className="space-y-4">
                 <Card className="border-secondary">
@@ -432,87 +427,14 @@ export default function LandingPage() {
                       {t.contact.form.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <form className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <label
-                            htmlFor="first-name"
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            {t.contact.form.firstName}
-                          </label>
-                          <Input id="first-name" placeholder="John" className="border-secondary" />
-                        </div>
-                        <div className="space-y-2">
-                          <label
-                            htmlFor="last-name"
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            {t.contact.form.lastName}
-                          </label>
-                          <Input id="last-name" placeholder="Doe" className="border-secondary" />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="email"
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          {t.contact.form.email}
-                        </label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="john.doe@example.com"
-                          className="border-secondary"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="phone"
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          {t.contact.form.phone}
-                        </label>
-                        <Input id="phone" type="tel" placeholder="(555) 123-4567" className="border-secondary" />
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="service"
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          {t.contact.form.service}
-                        </label>
-                        <select
-                          id="service"
-                          className="flex h-10 w-full rounded-md border border-secondary bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          <option value="">{t.contact.form.servicePlaceholder}</option>
-                          <option value="residential">{t.contact.services.residential}</option>
-                          <option value="commercial">{t.contact.services.commercial}</option>
-                          <option value="deep">{t.contact.services.deep}</option>
-                          <option value="specialized">{t.contact.services.specialized}</option>
-                        </select>
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="message"
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          {t.contact.form.message}
-                        </label>
-                        <Textarea
-                          id="message"
-                          placeholder={t.contact.form.messagePlaceholder}
-                          className="border-secondary"
-                        />
-                      </div>
-                    </form>
+                  <CardContent className="min-h-[600px]">
+                    <iframe
+                      src="https://calendly.com/discordfarma1"
+                      width="100%"
+                      height="600"
+                      frameBorder="0"
+                    />
                   </CardContent>
-                  <CardFooter>
-                    <Button className="w-full bg-primary hover:bg-primary/80">{t.contact.form.submit}</Button>
-                  </CardFooter>
                 </Card>
               </div>
             </div>
