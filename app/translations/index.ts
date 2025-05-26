@@ -38,6 +38,10 @@ export const translations = {
           title: 'Specialized Services',
           description: 'Window cleaning, carpet cleaning, post-construction cleanup, and more.',
         },
+        carpet: {
+          title: 'Carpet Cleaning',
+          description: 'Carpet cleaning, carpet shampooing, and more.',
+        },
       },
     },
     projects: {
@@ -116,6 +120,8 @@ export const translations = {
       },
     },
     footer: {
+      title: 'ROOT',
+
       description: 'Professional cleaning services for homes and businesses.',
       services: 'Services',
       about: 'About us',
@@ -164,6 +170,10 @@ export const translations = {
         specialized: {
           title: 'Spezialisierte Services',
           description: 'Fensterreinigung, Teppichreinigung, Bauabschlussreinigung und mehr.',
+        },
+        carpet: {
+          title: 'Teppichreinigung',
+          description: 'Teppichreinigung, Teppichschampooing und mehr.',
         },
       },
     },
@@ -223,7 +233,7 @@ export const translations = {
       title: 'Kontaktieren Sie uns',
       subtitle: 'Haben Sie Fragen oder möchten Sie eine Reinigung planen? Nehmen Sie Kontakt mit uns auf.',
       form: {
-        title: 'Angebot anfordern',
+        title: 'Termin vereinbaren',
         description: 'Füllen Sie das Formular unten aus und wir melden uns so schnell wie möglich bei Ihnen.',
         firstName: 'Vorname',
         lastName: 'Nachname',
@@ -240,9 +250,11 @@ export const translations = {
         commercial: 'Gewerbereinigung',
         deep: 'Grundreinigung',
         specialized: 'Spezialisierte Services',
+        carpet: 'Teppichreinigung',
       },
     },
     footer: {
+      title: 'ROOT',
       description: 'Professionelle Reinigungsservices für Haushalte und Unternehmen.',
       services: 'Dienstleistungen',
       about: 'Über uns',

@@ -1,5 +1,5 @@
 'use client'
-
+// fixed Hydration error
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
-  Check,
+  Check,  
   ChevronRight,
   Home,
   MapPin,
@@ -18,11 +18,16 @@ import {
   Warehouse,
   AtSign,
 } from "lucide-react"
-import BeforeAfterSlider from "./before-after-slider"
 import { useLanguage } from "./contexts/LanguageContext"
 import { translations } from "./translations"
 import Script from "next/script"
 import { useEffect } from "react"
+import dynamic from 'next/dynamic'
+
+const BeforeAfterSlider = dynamic(() => import('./before-after-slider'), {
+  ssr: false,
+})
+
 
 declare global {
   interface Window {
@@ -83,7 +88,12 @@ export default function LandingPage() {
             >
               {language === 'en' ? 'DE' : 'EN'}
             </Button>
-            <Button className="bg-secondary text-primary hover:bg-accent">{t.hero.bookNow}</Button>
+            <Button className="bg-secondary text-primary hover:bg-accent" onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}>{t.hero.bookNow}</Button>
           </div>
         </div>
       </header>
@@ -411,14 +421,51 @@ export default function LandingPage() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
+                {/* Calendly */}
                 <div className="space-y-2">
                   <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-white">{t.nav.contact}</div>
                   <h2 className="text-3xl font-bold tracking-tighter text-primary md:text-4xl/tight">{t.contact.title}</h2>
                   <p className="text-muted-foreground md:text-xl">
                     {t.contact.subtitle}
                   </p>
+
+                  {/* Contact-Box */}
+                  <div className="mt-6 p-6 bg-muted/50 rounded-lg border border-secondary/20">
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-3">
+                        <Users className="h-8 w-8 text-primary mt-1" />
+                        <div>
+                          <p className="font-medium text-primary">Kristina Root</p>
+                          <p className="text-muted-foreground">Rudolf-Breitscheidstr. 70</p>
+                          <p className="text-muted-foreground">67655 Kaiserslautern</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <AtSign className="h-8 w-8 text-primary" />
+                        <a href="mailto:info@root.de" className="text-muted-foreground hover:text-primary transition-colors">
+                          info@root.de
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Phone className="h-8 w-8 text-primary" />
+                        <a href="tel:+4917266622" className="text-muted-foreground hover:text-primary transition-colors">
+                          +49 172-66622
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Sparkles className="h-8 w-8 text-primary" />
+                        <a href="https://root-clean.de" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                          root-clean.de
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  {/* End of Contact-Box */}
+
                 </div>
+                {/* End of Calendly */}
               </div>
+              
               <div className="space-y-4">
                 <Card className="border-secondary">
                   <CardHeader>
@@ -449,27 +496,31 @@ export default function LandingPage() {
             <div className="flex-1 min-w-[200px]">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-secondary" />
-                <span className="text-xl font-bold">ROOT</span>
+                <span className="text-xl font-bold">
+                  {t.footer.title}
+                </span>
               </div>
-              <p className="text-sm text-white/80">Professional cleaning services for homes and businesses.</p>
+              <p className="text-sm text-white/80">
+                {t.footer.description}
+              </p>
             </div>
             <div className="flex-1 min-w-[200px]">
               <h3 className="text-sm font-medium text-secondary">Services</h3>
               <nav className="flex flex-col gap-2">
                 <Link href="#projects" className="text-sm text-white/80 hover:text-secondary">
-                  Residential Cleaning
+                  {t.services.cards.residential.title}
                 </Link>
                 <Link href="#projects" className="text-sm text-white/80 hover:text-secondary">
-                  Commercial Cleaning
+                  {t.services.cards.commercial.title}
                 </Link>
                 <Link href="#projects" className="text-sm text-white/80 hover:text-secondary">
-                  Deep Cleaning
+                  {t.services.cards.deep.title}
                 </Link>
                 <Link href="#projects" className="text-sm text-white/80 hover:text-secondary">
-                  Window Cleaning
+                  {t.services.cards.specialized.title}
                 </Link>
                 <Link href="#projects" className="text-sm text-white/80 hover:text-secondary">
-                  Carpet Cleaning
+                  {t.services.cards.carpet.title}
                 </Link>
               </nav>
             </div>
