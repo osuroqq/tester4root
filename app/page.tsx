@@ -88,12 +88,15 @@ export default function LandingPage() {
             >
               {language === 'en' ? 'DE' : 'EN'}
             </Button>
-            <Button className="bg-secondary text-primary hover:bg-accent" onClick={() => {
+            <Link href="#contact">
+            <Button 
+            className="bg-secondary text-primary hover:bg-accent" onClick={() => {
               const contactSection = document.getElementById('contact');
               if (contactSection) {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
               }
             }}>{t.hero.bookNow}</Button>
+            </Link>
           </div>
         </div>
       </header>
