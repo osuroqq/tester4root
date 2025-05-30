@@ -23,6 +23,7 @@ import { translations } from "./translations"
 import Script from "next/script"
 import { useEffect } from "react"
 import dynamic from 'next/dynamic'
+import { BookingSystem } from "@/components/BookingSystem/BookingSystem"
 
 const BeforeAfterSlider = dynamic(() => import('./before-after-slider'), {
   ssr: false,
@@ -478,12 +479,7 @@ export default function LandingPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="min-h-[600px]">
-                    <iframe
-                      src="https://calendly.com/discordfarma1"
-                      width="100%"
-                      height="600"
-                      frameBorder="0"
-                    />
+                    <BookingSystem />
                   </CardContent>
                 </Card>
               </div>
