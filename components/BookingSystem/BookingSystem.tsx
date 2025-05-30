@@ -223,6 +223,7 @@ export const BookingSystem: React.FC<BookingSystemProps> = (props) => {
         )}
       </div>
       {/* Gentle fade-in animation */}
+      
       <style jsx global>{`
         .animate-fade-in {
           animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
